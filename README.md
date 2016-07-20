@@ -1,7 +1,7 @@
 # FastPathfinder
 A fast, Non-rasterizing pathfinder
 
-See an example at http://wazzaps.github.io/fastpathfinder
+See an example at http://Wazzaps.github.io/FastPathfinder
 
 # Usage
 ```javascript
