@@ -1,0 +1,32 @@
+<body>
+	<canvas id="can" style="border: 1px solid #000" width="500" height="500"></canvas>
+	<br> Sides:
+	<input type="number" min="2" step="1" onchange="sides = parseInt(this.value)" value="5" autofocus>
+	<br>
+	<a href="index.html">Moving shapes</a>
+	<script src="fastpathfinder.js"></script>
+	<script src="drawingTools.js"></script>
+	<script>
+		let sides = 5; // sides = 10000 is 25 fps! sides = 3000 is smooth 60! Note that this is done on cpu yet it's still really fast.
+
+		function makeShape() {
+			//sides = Math.max(3, sides);
+			let shape = [];
+			for (let i = 0; i < sides; i++) {
+				shape.push(rotate_point([250, 150], [250, 250], Math.PI * 2 / sides * i));
+			}
+			return shape;
+		}
+
+		function render() {
+			let offset = Math.abs(new Date().getTime() % 1000 / 6 - 83) + 250;
+			let rot = new Date().getTime() % 5000 / 2500 * Math.PI;
+			let shapes = [rotShapeAround(makeShape(sides, 100), rot)];
+			let path = makePath([50, 30], [480, 420], shapes);
+			draw(path, shapes);
+			requestAnimationFrame(render);
+		}
+
+		render();
+	</script>
+</body>
