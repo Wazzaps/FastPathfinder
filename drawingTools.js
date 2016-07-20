@@ -1,6 +1,12 @@
 let can = document.getElementById("can");
 let ctx = can.getContext("2d");
 
+// fps calc
+var filterStrength = 20;
+var frameTime = 0,
+	lastLoop = new Date,
+	thisLoop;
+
 function rotate_point(pt, origin, angle) {
 	let s = Math.sin(angle);
 	let c = Math.cos(angle);
@@ -64,4 +70,10 @@ function draw(path, shapes) {
 	for (let i = 0; i < path.length; i++) {
 		ctx.fillRect(path[i][0] - 5, path[i][1] - 5, 10, 10);
 	}
+
+	// Draw FPS
+	var thisFrameTime = (thisLoop = new Date) - lastLoop;
+	frameTime += (thisFrameTime - frameTime) / filterStrength;
+	lastLoop = thisLoop;
+	ctx.fillText((1000 / frameTime).toFixed(1), 450, 20);
 }
