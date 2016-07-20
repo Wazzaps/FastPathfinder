@@ -1,0 +1,18 @@
+<body>
+	<canvas id="can" style="border: 1px solid #000" width="500" height="500"></canvas>
+	<br><a href="nshape.html">N sides to a shape</a>
+	<script src="fastpathfinder.js"></script>
+	<script src="drawingTools.js"></script>
+	<script>
+		function render() {
+			let offset = Math.abs(new Date().getTime() % 1000 / 6 - 83) + 250;
+			let rot = new Date().getTime() % 5000 / 2500 * Math.PI;
+			let shapes = [rot3Around([[130, 50], [250, 150], [80, 150]], rot), rot3Around([[offset, 300], [offset, 380], [offset + 80, 300]], rot * 3)];
+			let path = makePath([30, 30], [450, 450], shapes);
+			draw(path, shapes);
+			requestAnimationFrame(render);
+		}
+
+		render();
+	</script>
+</body>
